@@ -1,65 +1,85 @@
 console.log('Scripts connected!');
 
 
-var cards = [
-  ['Ace', 'Spades', 11, 0],
-  ['King', 'Spades', 10, -1],
-  ['Queen', 'Spades', 10, -1],
-  ['Jack', 'Spades', 10, -1],
-  ['Ten', 'Spades', 10, -1],
-  ['Nine', 'Spades', 9, 0],
-  ['Eight', 'Spades', 8, 0],
-  ['Seven', 'Spades', 7, 0],
-  ['Six', 'Spades', 6, 1],
-  ['Five', 'Spades', 5, 1],
-  ['Four', 'Spades', 4, 1],
-  ['Three', 'Spades', 3, 1],
-  ['Two', 'Spades', 2, 1],
-  ['Ace', 'Clubs', 11, 0],
-  ['King', 'Clubs', 10, -1],
-  ['Queen', 'Clubs', 10, -1],
-  ['Jack', 'Clubs', 10, -1],
-  ['Ten', 'Clubs', 10, -1],
-  ['Nine', 'Clubs', 9, 0],
-  ['Eight', 'Clubs', 8, 0],
-  ['Seven', 'Clubs', 7, 0],
-  ['Six', 'Clubs', 6, 1],
-  ['Five', 'Clubs', 5, 1],
-  ['Four', 'Clubs', 4, 1],
-  ['Three', 'Clubs', 3, 1],
-  ['Two', 'Clubs', 2, 1],
-  ['Ace', 'Hearts', 11, 0],
-  ['King', 'Hearts', 10, -1],
-  ['Queen', 'Hearts', 10, -1],
-  ['Jack', 'Hearts', 10, -1],
-  ['Ten', 'Hearts', 10, -1],
-  ['Nine', 'Hearts', 9, 0],
-  ['Eight', 'Hearts', 8, 0],
-  ['Seven', 'Hearts', 7, 0],
-  ['Six', 'Hearts', 6, 1],
-  ['Five', 'Hearts', 5, 1],
-  ['Four', 'Hearts', 4, 1],
-  ['Three', 'Hearts', 3, 1],
-  ['Two', 'Hearts', 2, 1],
-  ['Ace', 'Diamonds', 11, 0],
-  ['King', 'Diamonds', 10, -1],
-  ['Queen', 'Diamonds', 10, -1],
-  ['Jack', 'Diamonds', 10, -1],
-  ['Ten', 'Diamonds', 10, -1],
-  ['Nine', 'Diamonds', 9, 0],
-  ['Eight', 'Diamonds', 8, 0],
-  ['Seven', 'Diamonds', 7, 0],
-  ['Six', 'Diamonds', 6, 1],
-  ['Five', 'Diamonds', 5, 1],
-  ['Four', 'Diamonds', 4, 1],
-  ['Three', 'Diamonds', 3, 1],
-  ['Two', 'Diamonds', 2, 1]
-]
+var game = {
+  player1: {},
+  player2: {},
+  deck: [
+    {card: 'Ace Spades', value: 0},
+    {card: 'King Spades', value: -1},
+    {card: 'Queen Spades', value: -1},
+    {card: 'Jack Spades', value: -1},
+    {card: 'Ten Spades', value: -1},
+    {card: 'Nine Spades', value: 0},
+    {card: 'Eight Spades', value: 0},
+    {card: 'Seven Spades', value: 0},
+    {card: 'Six Spades', value: 1},
+    {card: 'Five Spades', value: 1},
+    {card: 'Four Spades', value: 1},
+    {card: 'Three Spades', value: 1},
+    {card: 'Two Spades', value: 1},
+    {card: 'Ace Clubs', value: 0},
+    {card: 'King Clubs', value: -1},
+    {card: 'Queen Clubs', value: -1},
+    {card: 'Jack Clubs', value: -1},
+    {card: 'Ten Clubs', value: -1},
+    {card: 'Nine Clubs', value: 0},
+    {card: 'Eight Clubs', value: 0},
+    {card: 'Seven Clubs', value: 0},
+    {card: 'Six Clubs', value: 1},
+    {card: 'Five Clubs', value: 1},
+    {card: 'Four Clubs', value: 1},
+    {card: 'Three Clubs', value: 1},
+    {card: 'Two Clubs', value: 1},
+    {card: 'Ace Hearts', value: 0},
+    {card: 'King Hearts', value: -1},
+    {card: 'Queen Hearts', value: -1},
+    {card: 'Jack Hearts', value: -1},
+    {card: 'Ten Hearts', value: -1},
+    {card: 'Nine Hearts', value: 0},
+    {card: 'Eight Hearts', value: 0},
+    {card: 'Seven Hearts', value: 0},
+    {card: 'Six Hearts', value: 1},
+    {card: 'Five Hearts', value: 1},
+    {card: 'Four Hearts', value: 1},
+    {card: 'Three Hearts', value: 1},
+    {card: 'Two Hearts', value: 1},
+    {card: 'Ace Diamonds', value: 0},
+    {card: 'King Diamonds', value: -1},
+    {card: 'Queen Diamonds', value: -1},
+    {card: 'Jack Diamonds', value: -1},
+    {card: 'Ten Diamonds', value: -1},
+    {card: 'Nine Diamonds', value: 0},
+    {card: 'Eight Diamonds', value: 0},
+    {card: 'Seven Diamonds', value: 0},
+    {card: 'Six Diamonds', value: 1},
+    {card: 'Five Diamonds', value: 1},
+    {card: 'Four Diamonds', value: 1},
+    {card: 'Three Diamonds', value: 1},
+    {card: 'Two Diamonds', value: 1}
+  ]
+}
 
 
 
+function shuffle(array) {
+  var m = array.length, t, i;
 
+  // While there remain elements to shuffle…
+  while (m) {
 
-    //Change the setup to have an input
-    	//once the correct current count is entered, the cards with change
-    		//see how many pairs you can get thru in 20 seconds and compare it the the next player
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array;
+}
+shuffle(game.deck)
+console.log([game.deck.pop(), game.deck.pop()])
+console.log([game.deck.pop(), game.deck.pop()])
+console.log(game.deck)

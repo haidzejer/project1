@@ -4,9 +4,16 @@ body {
 
 .card{
   display: inline-block;
+  height: 200px;
+  width: 140px;
+  border: 1px solid black;
 }
 
 .card img{
   height: 200px;
   width: 140px;
+}
+
+#player1Box, #player2Box {
+  display: inline-block;
 }

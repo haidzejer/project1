@@ -77,6 +77,11 @@ table {
   height: 100%;
 }
 
-#playerTwoTimeOut table {
+#playerTwoTimeOut th, td {
   background-color: black;
+  padding: 0 10px;
+}
+
+#playerTwoTimeOut th {
+  margin-bottom: 20px;
 }

@@ -119,19 +119,23 @@
 
         <div id="playerTwoTimeOut">
           <h1>Time's Up!</h1>
-          <h2>Let's see how you did!</h2>
+          <h2 id='playerTwoFinalScore'></h2>
+          <h2>Let's see how you compare!</h2>
           <table>
             <tr>
-              <th>Player 1</th>
-              <th>Player 2</th>
+              <th>Player</th>
+              <th>1</th>
+              <th>2</th>
             </tr>
             <tr>
+              <td>Correct Counts</td>
               <td id='p1Overall'>Pairs</td>
               <td id='p2Overall'>Pairs</td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
+              <td>Incorrect Counts</td>
+              <td id="p1WrongCount"></td>
+              <td id="p2WrongCount"></td>
             </tr>
           </table>
           <h2 id='winner'>Player 2 Wins!</h2>

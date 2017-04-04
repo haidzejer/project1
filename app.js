@@ -83,8 +83,12 @@ var $p2Start = $('#p2Start');
 var $timer = $('.timer');
 var count = 30;
 var $guess = $('#countGuess');
-var actualCount = 0;
-var wrongCount = 0;
+var p1ActualCount = 0;
+var p2ActualCount = 0;
+var p1WrongCount = 0;
+var p2WrongCount = 0;
+$('#p1WrongCount').text(p1WrongCount);
+$('#p2WrongCount').text(p2WrongCount);
 var $score = $('#score');
 var $p1Overall = $('#p1Overall')
 var $p2Overall = $('#p2Overall')
@@ -92,42 +96,54 @@ var pairs = 0;
 var $winner = $('#winner');
 var winnerPick = '';
 var $p1FinalScore = $('#playerOneFinalScore');
+var $p2FinalScore = $('#playerTwoFinalScore');
 $timer.text('Time remaining: ' + count);
 // $score.text('Score :' + pairs);
 $p1FinalScore.text('You scored ' + game.player1.score + ' points!');
+$p2FinalScore.text('You scored ' + game.player2.score + ' points!');
 $winner.text('Winner: '+ winnerPick)
 $p1Overall.text(game.player1.score);
 $p2Overall.text(game.player2.score);
 
-function displayCards() {
+function p1DisplayCards() {
   var newCard1 = game.deck.pop();
   var newCard2 = game.deck.pop();
-  actualCount += Number(newCard1.count);
-  actualCount += Number(newCard2.count);
+  p1ActualCount += Number(newCard1.count);
+  p1ActualCount += Number(newCard2.count);
+  $("#card1").html("<img src=" + newCard1.card + '>');
+  $("#card2").html("<img src=" + newCard2.card + '>');
+}
+
+function p2DisplayCards() {
+  var newCard1 = game.deck.pop();
+  var newCard2 = game.deck.pop();
+  p2ActualCount += Number(newCard1.count);
+  p2ActualCount += Number(newCard2.count);
   $("#card1").html("<img src=" + newCard1.card + '>');
   $("#card2").html("<img src=" + newCard2.card + '>');
 }
 
 
 $start.on('click', function() {
-  displayCards();
+  p1DisplayCards();
   $start.css('display', 'none');
 
   $guess.on('change', function() {
   	currentGuess = $guess.val()
-    if(currentGuess == actualCount) {
-      displayCards();
+    if(currentGuess == p1ActualCount) {
+      p1DisplayCards();
       game.player1.score += 1;
       pairs ++
       $score.text('Score :' + pairs);
-      $p1FinalScore.text('You scored ' + game.player1.score + ' points!');
+      $p1FinalScore.text('Player 1 scored ' + game.player1.score + ' points!');
       $p1Overall.text(game.player1.score);
       $guess.val('')
       $('#wrong').html('');
     }
     else {
       $('#wrong').html('<p>Wrong Count, try again!</p>');
-      wrongCount += 1;
+      $('#p1WrongCount').text(p1WrongCount);
+      p1WrongCount += 1;
     }
   })
 
@@ -141,6 +157,7 @@ $start.on('click', function() {
     {
        clearInterval(counter);
        $('#playerOneTimeOut').css('display', 'block')
+       shuffle(game.deck)
     }
   }
 });
@@ -148,26 +165,27 @@ $start.on('click', function() {
 $p2Start.on('click', function () {
   $('#playerOneTimeOut').css('display', 'none')
   count = 30;
-  actualCount = 0;
+  p2ActualCount = 0;
   wrongCount = 0;
   pairs = 0;
-  displayCards();
+  p2DisplayCards();
 
   $guess.on('change', function() {
     currentGuess = $guess.val()
-    if(currentGuess == actualCount) {
-      displayCards();
+    if(currentGuess == p2ActualCount) {
+      p2DisplayCards();
       game.player2.score += 1;
       pairs ++
       $score.text('Score :' + pairs);
-      $p2FinalScore.text('You scored ' + game.player2.score + ' points!');
+      $p2FinalScore.text('Player 2 scored ' + game.player2.score + ' points!');
       $p2Overall.text(game.player2.score);
       $guess.val('')
       $('#wrong').html('');
     }
     else {
       $('#wrong').html('<p>Wrong Count, try again!</p>');
-      wrongCount += 1;
+      $('#p2WrongCount').text(p2WrongCount);
+      p2WrongCount += 1;
     }
   })
 

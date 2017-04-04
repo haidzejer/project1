@@ -1,5 +1,23 @@
 body {
   background-color: RGB(39, 117, 84);
+  padding: 0;
+  margin: 0;
+}
+
+#container {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+
+#rules {
+  border: 1px solid black;
+  width: 20%;
+  height: 100%;
+  display: inline-block;
+  float: left;
+  text-align: center;
+  color: white;
 }
 
 .card{
@@ -7,6 +25,7 @@ body {
   height: 200px;
   width: 140px;
   border: 1px solid black;
+  border-radius: 7px;
 }
 
 .card img{
@@ -14,6 +33,50 @@ body {
   width: 140px;
 }
 
+.buttons {
+  clear: left;
+}
+
+#start, #p2Start {
+  width: 20%;
+  height: 10%;
+  background-color: lime;
+  color: red;
+}
+
+#p2Start {
+  font-size: 28px;
+}
+
+#next {
+  display: none;
+}
+
 #player1Box, #player2Box {
   display: inline-block;
+  position: relative;
+  z-index: 0;
+}
+
+table, th, td {
+    border: 1px solid white;
+}
+table {
+  margin: 0 auto;
+}
+
+#playerOneTimeOut, #playerTwoTimeOut {
+  color: white;
+  text-align: center;
+  display: none;
+  background-color: rgba(0, 0, 0, .65);
+  position: absolute;
+  top: 0px;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+}
+
+#playerTwoTimeOut table {
+  background-color: black;
 }

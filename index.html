@@ -7,25 +7,134 @@
   </head>
   <body>
 
-    	<h1>Card Counting Game</h1>
+      <div id="rules">
+        <h3>Hi-Opt-I Card Counting System</h3>
+        <table>
+          <tr>
+            <th>card</th>
+            <th>count</th>
+          </tr>
+          <tr>
+            <td>A</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>+1</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>+1</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>+1</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>+1</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>-1</td>
+          </tr>
+          <tr>
+            <td>J</td>
+            <td>-1</td>
+          </tr>
+          <tr>
+            <td>Q</td>
+            <td>-1</td>
+          </tr>
+          <tr>
+            <td>K</td>
+            <td>-1</td>
+          </tr>
+        </table>
+      </div>
+
       <div id="container">
+        <h1>Card Counting Game</h1>
+
+        <h3 class="timer"></h3>
+        <h3 id='score'></h3>
 
         <div id="player1Box">
 
           <div id='card1' class="card"></div>
           <div id='card2' class="card"></div>
 
-          <button id="next">Next!</button>
+          <div class='buttons'>
+            <p id="wrong"></p>
+          <button id="start">Start!</button>
+
+          <select id="countGuess">
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+            <option disabled selected value> -- select an option -- </option>
+            <option value="0">0</option>
+            <option value="-1">-1</option>
+            <option value="-2">-2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-5">-5</option>
+            <option value="-6">-6</option>
+            <option value="-7">-7</option>
+            <option value="-8">-8</option>
+          </select>
 
         </div>
 
-        <div id="player2Box">
+        </div>
 
-          <div id='card3' class="card"></div>
-          <div id='card4' class="card"></div>
 
-          <button id="next">Next!</button>
+        <div id="playerOneTimeOut">
+          <h1>Time's Up!</h1>
+          <h2 id='playerOneFinalScore'></h2>
+          <h2>When Player 2 is ready, click Start!</h2>
+          <button id='p2Start'>Start!</button>
+        </div>
 
+        <div id="playerTwoTimeOut">
+          <h1>Time's Up!</h1>
+          <h2>Let's see how you did!</h2>
+          <table>
+            <tr>
+              <th>Player 1</th>
+              <th>Player 2</th>
+            </tr>
+            <tr>
+              <td id='p1Overall'>Pairs</td>
+              <td id='p2Overall'>Pairs</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+          <h2 id='winner'>Player 2 Wins!</h2>
         </div>
 
 

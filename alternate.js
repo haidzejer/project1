@@ -211,9 +211,20 @@ function checkWinner() {
   }
 }
 
-// $restart.on('click', function () {
-//
-// });
-
 player1.initialize();
 player2.initialize();
+
+$restart.on('click', function () {
+   player1.score
+   player1.wrongCount
+   player1.actualCount
+   player1.timerCount
+   player2.score
+   player2.wrongCount
+   player2.actualCount
+   player2.timerCount
+   shuffle(game.deck)
+   $('#wrong').html('');
+   $('#playerTwoTimeOut').css('display', 'none')
+   player1.start.css('display', 'block');
+});

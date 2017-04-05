@@ -5,6 +5,51 @@ var game = {
     actualCount: 0,
     timerCount: 30,
     start: $('#start'),
+    initialize: function() {
+      var player1 = this;
+      player1.start.on('click', function () {
+          displayCards(player1);
+            player1.start.css('display', 'none');
+          //  $('#playerOneTimeOut').css('display', 'none');
+
+          $guess.on('change', function() {
+          	var currentGuess = $guess.val()
+            if(currentGuess == player1.actualCount) {
+              player1.score += 1;
+              displayCards(player1);
+              $('#score').text('Score :' + player1.score);
+              $guess.val('')
+              $('#wrong').html('');
+            }
+            else {
+              $('#wrong').html('<p>Wrong Count, try again!</p>');
+              player1.wrongCount += 1;
+            }
+          })
+
+          var counter = setInterval(timer, 1000);
+
+          function timer() {
+
+            player1.timerCount -= 1;
+            $timer.text('Time remaining: ' + player1.timerCount);
+            if (player1.timerCount <= 0)
+            {
+               clearInterval(counter);
+            //   if (player1 == player1) {
+                 $('#playerOneTimeOut').css('display', 'block')
+            //   }
+              //  else if (player1 == player2) {
+              //    checkWinner();
+              //    $('#playerTwoTimeOut').css('display', 'block')
+              //  }
+                $('#scoreRow').append('<td>' + player1.score + '</td>');
+                $('#wrongRow').append('<td>' + player1.wrongCount + '</td>');
+                shuffle(game.deck)
+            }
+          }
+      })
+    },
     finalScore: 'Player 1 scored ' + $(this).score + ' points!'
   },
   player2: {
@@ -13,6 +58,53 @@ var game = {
     actualCount: 0,
     timerCount: 30,
     start: $('#p2Start'),
+    initialize: function() {
+      var player2 = this;
+      player2.start.on('click', function () {
+          displayCards(player2);
+            player2.start.css('display', 'none');
+            $('#playerOneTimeOut').css('display', 'none');
+
+          $guess.on('change', function() {
+          	var currentGuess = $guess.val()
+            console.log(currentGuess);
+            console.log(player2.actualCount);
+            if(currentGuess == player2.actualCount) {
+              player2.score += 1;
+              displayCards(player2);
+              $('#score').text('Score :' + player2.score);
+              $guess.val('')
+              $('#wrong').html('');
+            }
+            else {
+              $('#wrong').html('<p>Wrong Count, try again!</p>');
+              player2.wrongCount += 1;
+            }
+          })
+
+          var counter = setInterval(timer, 1000);
+
+          function timer() {
+
+            player2.timerCount -= 1;
+            $timer.text('Time remaining: ' + player2.timerCount);
+            if (player2.timerCount <= 0)
+            {
+               clearInterval(counter);
+          //     if (player2 == player2) {
+          //       $('#playerOneTimeOut').css('display', 'block')
+          //     }
+          //     else if (player2 == player2) {
+                 checkWinner();
+                 $('#playerTwoTimeOut').css('display', 'block')
+          //     }
+                $('#scoreRow').append('<td>' + player2.score + '</td>');
+                $('#wrongRow').append('<td>' + player2.wrongCount + '</td>');
+                shuffle(game.deck)
+            }
+          }
+      })
+    },
     finalScore: 'Player 2 scored ' + $(this).score + ' points!'
   },
   deck: [
@@ -71,6 +163,12 @@ var game = {
   ]
 }
 
+var player1 = game.player1;
+var player2 = game.player2;
+var $guess = $('#countGuess');
+var $timer = $('.timer');
+var $restart = $('#restart');
+
 function shuffle(array) {
   var m = array.length, t, i;
 
@@ -90,14 +188,6 @@ function shuffle(array) {
 }
 shuffle(game.deck)
 
-var player1 = game.player1;
-var player2 = game.player2;
-var $guess = $('#countGuess');
-var $p1Overall = $('#p1Overall')
-var $p1FinalScore = $('#playerOneFinalScore');
-var $timer = $('.timer');
-// $timer.text('Time remaining: ' + player.timerCount);
-
 function displayCards(player) {
   var newCard1 = game.deck.pop();
   var newCard2 = game.deck.pop();
@@ -107,54 +197,23 @@ function displayCards(player) {
   $("#card2").html("<img src=" + newCard2.card + '>');
 }
 
-
-function runTurn(currentPlayer) {
-  displayCards(currentPlayer);
-  if (currentPlayer == player1) {
-    currentPlayer.start.css('display', 'none');
+function checkWinner() {
+  if(player1.score > player2.score) {
+    winnerPick = 'Player One'
+    $('#winner').text('Winner: Player 1!')
+  }
+  else if (player1.score < player2.score) {
+    winnerPick = 'Player Two'
+    $('#winner').text('Winner: Player 2!')
   }
   else {
-    $('#playerOneTimeOut').css('display', 'none');
-  }
-
-
-  $guess.on('change', function() {
-  	var currentGuess = $guess.val()
-    if(currentGuess == currentPlayer.actualCount) {
-      displayCards(currentPlayer);
-      currentPlayer.score += 1;
-      $('#score').text('Score :' + currentPlayer.score);
-      $guess.val('')
-      $('#wrong').html('');
-    }
-    else {
-      $('#wrong').html('<p>Wrong Count, try again!</p>');
-      currentPlayer.wrongCount += 1;
-    }
-  })
-
-  var counter = setInterval(timer, 1000);
-
-  function timer()
-  {
-    currentPlayer.timerCount = currentPlayer.timerCount - 1;
-    $timer.text('Time remaining: ' + currentPlayer.timerCount);
-    if (currentPlayer.timerCount <= 0)
-    {
-       clearInterval(counter);
-       if (currentPlayer == player1) {
-         $('#playerOneTimeOut').css('display', 'block')
-       }
-       else {
-         $('#playerTwoTimeOut').css('display', 'block')
-       }
-        $('#scoreRow').append('<td>' + currentPlayer.score + '</td>');
-        $('#wrongRow').append('<td>' + currentPlayer.wrongCount + '</td>');
-        shuffle(game.deck)
-    }
+    $('#winner').text('Tie Game!');
   }
 }
 
+// $restart.on('click', function () {
+//
+// });
 
-player1.start.on('click', runTurn(player1));
-player2.start.on('click', runTurn(player2));
+player1.initialize();
+player2.initialize();

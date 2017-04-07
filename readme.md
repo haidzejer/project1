@@ -16,6 +16,14 @@ ___
 * The cards being displayed will not change until you get the count correct
 * Try to get through as many card pairs as possible beofore time runs out
 
+### User Stories
+---
+* As a user, I can click a start button, so that I can take time to prepare.
+* As a user, I can click on numbered buttons that represent what I think the current count is, so that I don't have to type and submit my guess.
+* As a user, I can see whose turn it currently is so that we guess correctly.
+* As a user, I can click a restart button once the game is finished in order to play again.
+* As a user, I can see the results of how I did so that I can compare myself and the other player.
+
 ### Future Features
 ---
 1.  Add multiple card counting systems to pick from

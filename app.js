@@ -204,4 +204,7 @@ $restart.on('click', function () {
    $('#wrongRow td:last-child').remove();
 });
 
+$('#gotIt').on('click', function () {
+  $('#about').fadeOut(500);
+});
 game.initialize();

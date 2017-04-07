@@ -98,6 +98,8 @@ var game = {
           for (var i = 0; i < usedCards.length; i += 1) {
             game.deck.push(usedCards[i]);
           };
+          $guess.hide();
+          checkWinner();
           usedCards = [];
           shuffle(game.deck)
       }
@@ -160,11 +162,9 @@ function displayCards(player) {
 
 function checkWinner() {
   if(player1.score > player2.score) {
-    winnerPick = 'Player One'
     $('#winner').text('Winner: Player 1!')
   }
   else if (player1.score < player2.score) {
-    winnerPick = 'Player Two'
     $('#winner').text('Winner: Player 2!')
   }
   else {
@@ -173,6 +173,7 @@ function checkWinner() {
 }
 
 $('#start, #p2Start').on('click', function () {
+    $guess.show();
     game.startTimer();
     game.actualCount = 0;
     displayCards(game.players[game.currentPlayer]);
